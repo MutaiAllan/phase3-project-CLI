@@ -2,7 +2,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker 
 from models.movie import Movie
 from models.director import Director
-from models.base import Base 
+from models.base import Base
+from models.genre import Genre
 
 DATABASE_URL ="sqlite:///movielist.db"
 engine = create_engine(DATABASE_URL)
@@ -13,11 +14,11 @@ Base.metadata.create_all(engine)
 
 director1 = Director("Allan")
 director2 = Director("Mutai")
-movie1 = Movie("Mr.Robot")
-movie2 = Movie("Wisdom of crowd")
+genre1 = Genre("Fiction")
+genre2 = Genre("Crime")
+movie1 = Movie("Mr.Robot", director1, genre1)
+movie2 = Movie("Wisdom of crowd", director2, genre2)
 
-movie1.add_director(director1)
-movie2.add_director(director2)
 
 session.add(director1)
 session.add(director2)
@@ -31,6 +32,8 @@ for director in all_directors:
     print("Director name: ", director.name)
     for movie in director.movies:
         print("Movie: ", movie.title)
+
+    
 
 
 
