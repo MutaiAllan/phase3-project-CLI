@@ -4,6 +4,7 @@ from models.movie import Movie
 from models.director import Director
 from models.base import Base
 from models.genre import Genre
+from models.viewer import Viewer
 
 DATABASE_URL ="sqlite:///movielist.db"
 engine = create_engine(DATABASE_URL)
@@ -18,20 +19,30 @@ genre1 = Genre("Fiction")
 genre2 = Genre("Crime")
 movie1 = Movie("Mr.Robot", director1, genre1)
 movie2 = Movie("Wisdom of crowd", director2, genre2)
+movie3 = Movie("The Hack", director1, genre1)
+movie4 = Movie("Swordfish", director1, genre2)
+movie5 = Movie("Algorithm", director2, genre1)
 
-
-session.add(director1)
-session.add(director2)
+viewer1 = Viewer('Roy')
+viewer2 = Viewer('Jane')
+viewer1.watch_movie(movie1)
+viewer1.watch_movie(movie4)
+viewer2.watch_movie(movie3)
+viewer1.watched_movies()
+#session.add(director1)
+#session.add(director2)
 session.add(movie1)
 session.add(movie2)
+session.add(viewer1)
+session.add(viewer2)
 
 session.commit()
 
-all_directors = session.query(Director).all()
-for director in all_directors:
-    print("Director name: ", director.name)
-    for movie in director.movies:
-        print("Movie: ", movie.title)
+#all_directors = session.query(Director).all()
+#for director in all_directors:
+#    print("Director name: ", director.name)
+#    for movie in director.movies:
+#        print("Movie: ", movie.title)
 
     
 

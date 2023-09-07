@@ -10,6 +10,13 @@ director_movie_association = Table(
 genre_movie_association = Table(
     'genre_movie_association',
     Base.metadata,
-    Column('genre', Integer, ForeignKey('genres.id')),
+    Column('movie_id', Integer, ForeignKey('movies.id')),
+    Column('genre', Integer, ForeignKey('genres.id'))
+)
+
+viewer_movie_association = Table(
+    'viewer_movie_association',
+    Base.metadata,
+    Column('viewer_id', Integer, ForeignKey('viewers.id')),
     Column('movie_id', Integer, ForeignKey('movies.id'))
 )
